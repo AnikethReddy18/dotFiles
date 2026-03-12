@@ -1,0 +1,187 @@
+/**
+ * Author : Aditya Shakya (adi1090x)
+ * Enhanced Staggered Capsule Aesthetic 
+ **/
+
+/*****----- Configuration -----*****/
+configuration {
+    modi:                       "drun,run,filebrowser,window";
+    show-icons:                 true;
+    display-drun:               "󰀻 APPS";
+    display-run:                "󱓞 RUN";
+    display-filebrowser:        "󰉋 FILES";
+    display-window:             "󱂬 WINDOW";
+    drun-display-format:        "{name}";
+}
+
+/*****----- Global Properties -----*****/
+* {
+    font:                        "JetBrainsMono Nerd Font 10";
+    bg-dark:                     #161320;
+    fg-light:                    #D9E0EE;
+    text-dark:                   #161320; /* High contrast black */
+    
+    /* Waybar Palette */
+   /* Waybar Palette */
+cat-green:     #ABE9B3;
+cat-blue:      #96CDFB;
+cat-purple:    #DDB6F2;
+cat-pink:      #F5C2E7;
+cat-yellow:    #F9E2AF;
+cat-rose:      #F5E0DC;
+cat-lavender:  #CBA6F7;
+cat-orange:    #FAB387;
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    width:                       1000px;
+    enabled:                     true;
+    border-radius:               20px;
+    border:                      3px;
+    border-color:                @cat-lavender;
+    background-color:            @bg-dark;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    background-color:            transparent;
+    orientation:                 horizontal;
+    children:                    [ "imagebox", "listbox" ];
+}
+
+imagebox {
+    padding:                     20px;
+    background-color:            #1A1826;
+    background-image:            url("~/.config/rofi/images/i.jpg", height);
+    orientation:                 vertical;
+    children:                    [ "inputbar", "dummy", "mode-switcher" ];
+}
+
+listbox {
+    spacing:                     15px;
+    padding:                     25px;
+    background-color:            @bg-dark;
+    orientation:                 vertical;
+    children:                    [ "message", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     15px;
+    border-radius:               12px;
+    background-color:            @cat-yellow; /* Vibrant Battery Yellow */
+    text-color:                  @text-dark;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "󰍉";
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+
+entry {
+    enabled:                     true;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search Applications...";
+    placeholder-color:           #585B70;
+}
+
+/*****----- Mode Switcher -----*****/
+mode-switcher{
+    enabled:                     true;
+    spacing:                     15px;
+    background-color:            transparent;
+}
+
+button {
+    padding:                     12px;
+    border-radius:               12px;
+    background-color:            #1A1826;
+    text-color:                  @fg-light;
+    cursor:                      pointer;
+}
+
+button selected {
+    background-color:            @cat-pink; /* Pink for the active Tab */
+    text-color:                  @text-dark;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    spacing:                     12px;
+    background-color:            transparent;
+    text-color:                  @fg-light;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     15px;
+    padding:                     10px;
+    border-radius:               12px;
+}
+
+/* Base state for all elements */
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    font:                        "JetBrainsMono Nerd Font Bold 10";
+}
+
+element-icon {
+    background-color:            transparent;
+    size:                        38px;
+}
+
+/* Normal Items - Alternating background for better visual flow */
+element normal.normal {
+    background-color:            #1E1E2E; /* Dark Surface */
+    text-color:                  @fg-light;
+}
+
+element alternate.normal {
+    background-color:            #252535; /* Slightly lighter surface */
+    text-color:                  @fg-light;
+}
+
+/* SELECTED STATE - The "Active" Capsule */
+element selected.normal {
+    background-color:            @cat-green;   /* Vibrant Waybar Green */
+    text-color:                  @text-dark;
+}
+
+/* ACTIVE STATE (Programs already running) - Blue Capsule */
+element normal.active, element alternate.active {
+    background-color:            @cat-blue;
+    text-color:                  @text-dark;
+}
+
+/* URGENT STATE - Orange/Peach Capsule */
+element normal.urgent, element alternate.urgent {
+    background-color:            @cat-orange;
+    text-color:                  @text-dark;
+}
+
+/*****----- Message -----*****/
+textbox {
+    padding:                     15px;
+    border-radius:               12px;
+    background-color:            @cat-rose;
+    text-color:                  @text-dark;
+}
